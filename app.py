@@ -11,7 +11,7 @@ if requestType == "head":
 elif requestType == "post":
     data = str(input("Enter data for GET Request: "))
     json = str(input("Enter json for GET Request: "))
-    req.post()
+    req.post(data, json)
 
 elif requestType == "get":
     params = str(input("Enter parameter for GET Request: "))
@@ -20,12 +20,15 @@ elif requestType == "get":
 elif requestType == "put":
     data = str(input("Enter data for GET Request: "))
     json = str(input("Enter json for GET Request: "))
-    req.put()
+    req.put(data, json)
 
 elif requestType == "patch":
     data = str(input("Enter data for GET Request: "))
     json = str(input("Enter json for GET Request: "))
-    req.patch()
+    req.patch(data, json)
 
 elif requestType == "delete":
     req.delete()
+
+else :
+    print("Check Your Input Again")
