@@ -1,0 +1,1 @@
+Logger started! Anything printed will go to terminal_log.txt
