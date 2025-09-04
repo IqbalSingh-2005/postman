@@ -8,11 +8,12 @@ class Request:
         print(f"\n{method}")
         print("Status Code: ",response.status_code)
 
-        print("\nHeaders")
+        print("Headers".center(50,"="))
         for key,values in response.headers.items():
             print(f"{key} : {values}")
 
-        print(f"\nBody: {response.text}")
+        print("Body".center(50,"="))
+        print(response.text)
 
 #------------------------GET---------------------------------------
 
