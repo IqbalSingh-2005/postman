@@ -1,19 +1,31 @@
-import requests
-import sys
+from getRequests import Request
 
-rawURL=str(input("Enter URL to make your operation: "))
-print("Select one of the below operation \n get \n options \n head \n post \n put \n patch \n delete")
-requestType=str.lower(input("Request Type: "))
+URL = str(input("Enter URL: "))
+requestType = str.lower(input("Select Your Request Type \n GET, " \
+"OPTIONS, HEAD, POST, PUT, PATCH, or DELETE: "))
 
-req = requests.request(requestType,rawURL,params=None, )
+req = Request(URL)
+if requestType == "head":
+    req.head()
 
-print("Status Code: ",req.status_code)
+elif requestType == "post":
+    data = str(input("Enter data for GET Request: "))
+    json = str(input("Enter json for GET Request: "))
+    req.post()
 
-print("\nHeaders: ")
+elif requestType == "get":
+    params = str(input("Enter parameter for GET Request: "))
+    req.get(params)
 
-header=req.headers.items()
-for key,value in header:
-    print(f"{key}:{value}")
+elif requestType == "put":
+    data = str(input("Enter data for GET Request: "))
+    json = str(input("Enter json for GET Request: "))
+    req.put()
 
-print("\nResponse Body: ")
-print(req.text)
+elif requestType == "patch":
+    data = str(input("Enter data for GET Request: "))
+    json = str(input("Enter json for GET Request: "))
+    req.patch()
+
+elif requestType == "delete":
+    req.delete()
