@@ -66,23 +66,32 @@ class Request:
 #------------------------HEAD---------------------------------------
 
     def head(self):
-        response = requests.head(self.url)
-        self._print_(response, "HEAD")
-
+        try:
+            response = requests.head(self.url)
+            self._print_(response, "HEAD")
+        except requests.RequestException:
+            self._exception_()
 #------------------------PUT---------------------------------------
 
     def put(self, data=None, json=None):
-        response = requests.put(self.url, data=data)
-        self._print_(response, "PUT")
-
+        try:
+            response = requests.put(self.url, data=data)
+            self._print_(response, "PUT")
+        except requests.RequestException:
+            self._exception_()
 #------------------------PATCH---------------------------------------
 
     def patch(self, data=None, json=None):
-        response = requests.patch(self.url, data=data)
-        self._print_(response, "PATCH")
-
+        try:
+            response = requests.patch(self.url, data=data)
+            self._print_(response, "PATCH")
+        except requests.RequestException:
+            self._exception_()
 #------------------------DELETE---------------------------------------
 
     def delete(self):
-        response = requests.patch(self.url)
-        self._print_(response, "DELETE")
+        try:
+            response = requests.patch(self.url)
+            self._print_(response, "DELETE")
+        except requests.RequestException:
+            self._exception_()

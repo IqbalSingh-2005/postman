@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme{
+    --font-roboto: "Roboto", sans-serif;
+}
+
+@layer utilities {
+    .font-roboto-full {
+        font-family: var(--font-roboto);
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+}
+
+@layer components {
+  .hover-btn {
+    @apply relative rounded-[4px]
+           hover:bg-[#414140]/80 
+           hover:border-[#414140]/80;
+  }
+}
