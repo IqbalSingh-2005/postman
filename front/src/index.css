@@ -16,7 +16,7 @@
 
 @layer components {
   .hover-btn {
-    @apply relative rounded-[4px]
+    @apply 
            hover:bg-[#414140]/80 
            hover:border-[#414140]/80;
   }
