@@ -1,56 +1,105 @@
-import React from "react"
+import React from "react";
 
-export class Request extends React.Component{
-    render(){
+export class Request extends React.Component {
+  constructor() {
+    super();
+    this.methods = ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"];
+  }
+
+  render() {
+    return (
+      <>
+        {/* outer container: full width, center optional */}
+        <div className="w-full  mx-auto">
+          {/* flex row: center vertically, gap between items, padding */}
+          <div className="flex items-center px-4 py-6">
+            {/* select container: prevent shrinking so select keeps its width */}
+            <div className="flex-shrink-0">
+              <select
+                className="
+                  w-[120px]
+                  bg-[#464646]
+                  border-2
+                  border-r-0
+                  border-[#504f4f]
+                  text-[#bbbbbb]
+                  rounded-l-md
+                  pt-[8px] pb-[8px]
+                  px-2
+                  focus:outline-none
+                  
+                  cursor-pointer
+                  transition-colors
+                  duration-150
+                "
+              >
+                {this.methods.map((method) => (
+                  <option key={method.toLowerCase()} value={method.toLowerCase()}>
+                    {method}
+                  </option>
+                ))}
+              </select>
+              
+            </div>
+          
+            <div className="flex-1">
+                
+              <input
+                type="text"
+                placeholder="https://abc.com"
+                className="
+                  w-full  min-w-[200px]
+                  bg-[#464646]
+                  text-[#ffffff]
+                  border-2 
+                  border-l-0
+                  border-[#504f4f]
+                  rounded-r-md
+                  px-3 py-2
+                  focus:outline-none 
+                  
+                  transition-colors duration-150
+                "
+              />
+            </div>
+            <div className="pl-[5px]">
+              <SendButton onClick={()=>{
+                     // send button
+              }} />
+              </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+export class SendButton extends React.Component {
+    render () {
         return(
             <>
-            <div className="flex relative">
-            <div className="text-[18px] text-amber-200 pl-[40px] py-[30px]">
-                <select
-                
+            <div>
+                 <div className="flex-shrink-0">
+              <div
                 className="
-                    bg-amber-50
-                    border-2 border-amber-400
-                    text-gray-800
-                    rounded-md
-                    px-2 py-[8.5px]
-                    w-full
-                    focus:outline-none
-                    focus:border-amber-600
-                    focus:bg-white
-                    transition-colors
-                    duration-150
+                
+                  w-full  min-w-[100px]
+                  bg-[#39393a]
+                  border-2
+                  border-[#504f4f]
+                  text-[#bbbbbb]
+                  rounded-md
+                  pt-[8px] pb-[8px]
+                  px-[30px]
+                  hover:bg-[#4d4d4d]
+                  cursor-pointer
                 "
-                >
-          <option value="get">GET</option>
-          <option value="post">POST</option>
-          <option value="put">PUT</option>
-          <option value="patch">PATCH</option>
-          <option value="delete">DELETE</option>
-          <option value="head">HEAD</option>
-          <option value="options">OPTIONS</option>
-
-        </select>
+              >
+                Send
+              </div>
+              
             </div>
-            <div className=" py-[30px]">
-                <input
-                    type="text"
-                    placeholder="https://abc.com"
-                    className="
-                    w-[700px]
-                    bg-amber-50 
-                    text-gray-800
-                    border-2 border-amber-400 
-                    rounded-md
-                    px-2 py-2
-                    focus:outline-none 
-                    focus:border-amber-600 
-                    focus:bg-white
-                    transition-colors duration-150
-                    "
-                />
-                </div>
-                </div>
+            </div>
             </>
         )
     }

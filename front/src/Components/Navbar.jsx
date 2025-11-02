@@ -23,7 +23,7 @@ export class NavbarMain extends React.Component {
 }
 
 export class Navbarlist extends React.Component {
-   
+     
     constructor(){
         super();
         this.state = {
@@ -80,7 +80,7 @@ export class Add_button extends React.Component {
                 <>
                 <svg 
                 onClick={this.props.onClick}
-                className="text-[#7e7e7e4d] hover:text-amber-600/40 transition-colors duration-100" 
+                className="text-[#7e7e7e4d] hover:text-[#e9e9e9] transition-colors duration-100" 
                     width="23px" height="23px" 
                     viewBox="0 0 24 24">
                 <path d="M4 12H20M12 4V20" stroke="currentColor"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
