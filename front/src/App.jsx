@@ -1,5 +1,7 @@
 import {NavbarMain, Navbarlist } from "./Components/Navbar"
 import { Request } from "./Components/Request"
+import { Response } from "./Components/Response"
+
 
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
       <NavbarMain  />
       <Navbarlist />
       <Request />
+      <Response />
+      
       
     </div>
     </>
