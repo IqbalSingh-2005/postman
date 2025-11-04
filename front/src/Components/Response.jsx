@@ -4,11 +4,23 @@ import Editor from "@monaco-editor/react";
 
 
 export class Response extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.result = ["Body", "Headers"];
+    this.state = { view: "body" };
   }
+
+  handleViewChange = (e) => {
+    this.setState({ view: e.target.value });
+  };
+
   render() {
+    const resp = this.props.response || {};
+    const body = resp.body ?? resp.text ?? "";
+    const headers = resp.headers ? JSON.stringify(resp.headers, null, 2) : "";
+    const displayValue = this.state.view === "headers" ? headers : (typeof body === 'string' ? body : JSON.stringify(body, null, 2));
+    const language = this.state.view === "headers" ? "json" : (typeof body === 'string' && body.trim().startsWith("<") ? "html" : "json");
+
     return (
       <>
       <div className="border-2 border-[#9e9e9e66]
@@ -17,9 +29,10 @@ export class Response extends React.Component {
             <div className="">
               
               <select
+                value={this.state.view}
+                onChange={this.handleViewChange}
                 className="
                   w-[120px]
-                  
                   border-2
                   border-[#504f4f]
                   text-[#bbbbbb]
@@ -29,7 +42,6 @@ export class Response extends React.Component {
                   py-1
                   px-1
                   focus:outline-none
-                  
                   cursor-pointer
                   transition-colors
                   duration-150
@@ -47,11 +59,11 @@ export class Response extends React.Component {
               border-r-0
               border-[#9e9e9e66]">
                 <div className="p-2">
-                  <p className="text-[#bbbbbb]">Response Body</p>
+                  <p className="text-[#bbbbbb]">Response {this.state.view === 'headers' ? 'Headers' : 'Body'}</p>
                   <Editor 
-                  defaultLanguage="html"
+                  defaultLanguage={language}
                   theme="vs-dark"
-                  value="ug"
+                  value={displayValue}
                   options={{
                     fontSize: 14,
                     fontFamily: "Fira Code, monospace",
@@ -59,12 +71,9 @@ export class Response extends React.Component {
                     wordWrap: "on",
                     scrollBeyondLastLine: false,
                     automaticLayout: true,
+                    lineNumbers: "off",
                   }}
-                  className="text-[#eeeeee]
-                  w-full
-                  h-full
-                  min-h-[400px]"
-                    
+                  className="text-[#eeeeee] w-full h-full min-h-[400px]"
                     />
                 </div>
               </div>
