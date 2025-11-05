@@ -3,19 +3,17 @@ import ReactDom from 'react-dom';
 
 export class NavbarMain extends React.Component {
     render(){
-        var menu= ["Home","Workspaces"]
         return (
             <>
-            <div className="p-1 
-                            border-b-3 border-[#504f4f]  bg-[#333333]  ">
-                    <ul className="flex space-x-5 text-[20px] 
-                                text-amber-50 font-roboto ">
-                        {menu.map((item, index) => (
-                            <li 
-                            className="hover-btn rounded-[4px] m-[7px] px-2 py-1"
-                            key={index}>{item}</li>
-                        ))}
-                    </ul>
+            <div className="border-b-1 border-[#504f4f]  bg-[#333333]  ">
+                <div className="flex space-x-5 text-[15px] text-[#fcfcfc] font-roboto  ">
+                    <div className="hover-btn rounded-[4px] m-[7px] px-2 py-1">
+                        <div>Home</div>
+                    </div>
+                    <div className="hover-btn rounded-[4px] m-[7px] px-2 py-1">
+                        <div>Workspaces</div>
+                    </div>
+                </div>
             </div>
             </>
             )
@@ -27,26 +25,30 @@ export class Navbarlist extends React.Component {
     constructor(){
         super();
         this.state = {
-             requests: ["request 1",]
+             requests: ["Request 1",]
         }
         this.addTab = ()=>{
-            const newRequest = `requests ${this.state.requests.length + 1}`
+            const newRequest = `Requests ${this.state.requests.length + 1}`
 
             this.setState((prevRequests)=>({
                 requests: [...prevRequests.requests, newRequest],
             }))
         }
+        this.renameReq = () => {
+            
+        }
     }
     render(){
         return (
                 <>
-                <div className="p-1
-                                font-roboto  text-[18px] text-[#ffffff] 
-                                border-b-3 border-[#504f4f]
+                <div className="
+                                font-roboto  text-[15px] text-[#ffffff] 
+                                border-b-1 border-[#504f4f]
                                 flex">
-                    
-                        <div >
-                            <ul className="py-2 flex text-[20px]">
+                    <div >
+                        <div className="">
+                            <ul className="py-3
+                                            flex">
                                 {this.state.requests.map((item, index) => (
                                     <li
                                     key={index}
@@ -54,7 +56,8 @@ export class Navbarlist extends React.Component {
                                         index !== this.state.requests.length - 1 ? 'border-r-2 border-[#b8b8b8]' : ''
                                     }`}
                                     >
-                                    <div className="hover-btn px-3 py-1 rounded-[4px] mr-1">
+                                    <div className="hover-btn px-3 py-1 rounded-[4px] mr-1"
+                                        >
                                         {item}
                                     </div>
                                     </li>
@@ -63,11 +66,13 @@ export class Navbarlist extends React.Component {
                         
                         
                     </div>
+                    </div>
                     <div className=" px-5 py-[14px]" >
                         <Add_button onClick={this.addTab} />
                     
                     </div>
-                </div>
+                    </div>
+                
                 </>
 
         )
