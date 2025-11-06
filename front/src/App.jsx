@@ -27,8 +27,9 @@ function App() {
     <div className="min-h-screen bg-[#212121] ">
       <NavbarMain  />
       <Navbarlist />
-      {/* <Request onSend={handleSend} />
-      <Response response={response} /> */}
+      <Request onSend={handleSend} />
+      {/* <Response response={response} /> */}
+      
     </div>
     </>
   )

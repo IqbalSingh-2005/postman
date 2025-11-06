@@ -25,29 +25,21 @@ export class Request extends React.Component {
     return (
       <>
         {/* outer container: full width, center optional */}
-        <div className="w-full  mx-auto">
+        <div className="p-3 border-2 ">
           {/* flex row: center vertically, gap between items, padding */}
-          <div className="flex items-center px-4 py-6">
+          <div className="flex items-center  border-[#ffffff] ">
             {/* select container: prevent shrinking so select keeps its width */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 ">
               <select
                 value={this.state.method}
                 onChange={this.handleMethodChange}
                 className="
-                  w-[120px]
-                  bg-[#464646]
-                  border-2
-                  border-r-0
-                  border-[#504f4f]
-                  text-[#bbbbbb]
-                  rounded-l-md
-                  pt-[8px] pb-[8px]
-                  px-2
-                  focus:outline-none 
+                  border-1 border-r-0 border-[#504f4f] 
+                  bg-[#464646] text-[#ffffff] rounded-l-md 
+                  px-3 py-2 focus:outline-none 
+                  transition-colors duration-150
+                  appearance-none
                   
-                  cursor-pointer
-                  transition-colors
-                  duration-150
                 "
               >
                 {this.methods.map((method) => (
@@ -56,27 +48,26 @@ export class Request extends React.Component {
                   </option>
                 ))}
               </select>
-
+                  
             </div>
+            <div className="py-[12px] border-t-1 border-b-1 border-[#504f4f] bg-[#464646] ">
+              <div className=" right-0 top-1/2  h-4 w-[1.5px] border-[1px] rounded-2xl border-[#7c7c7caf]"></div>
+              </div>
 
             <div className="flex-1">
+              
               <input
                 value={this.state.url}
                 onChange={this.handleUrlChange}
                 type="text"
                 placeholder="https://abc.com"
                 className="
-                  w-full  min-w-[200px]
-                  bg-[#464646]
-                  text-[#ffffff]
-                  border-2 
-                  border-l-0
-                  border-[#504f4f]
-                  rounded-r-md
-                  px-3 py-2
-                  focus:outline-none 
-                  
+                  w-full
+                  border-1 border-l-0 border-[#504f4f] 
+                  bg-[#464646] text-[#ffffff] rounded-r-md 
+                  px-3 py-2 focus:outline-none 
                   transition-colors duration-150
+                  
                 "
               />
             </div>
