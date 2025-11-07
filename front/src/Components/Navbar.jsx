@@ -102,7 +102,7 @@ export class Navbarlist extends React.Component {
                                                 }
                                                 onKeyDown={this.onKeyDown}
                                                 onBlur={this.commit} // clicking away saves
-                                                className="bg-[#1f1f1f] border border-[#555] rounded-[4px] px-2 py-[2px] text-[#fff] outline-none w-[100px]"
+                                                className="bg-[#1f1f1f]  border-1 border-[#555] rounded-[4px] px-2 py-[2px] text-[#fff] outline-none w-[100px]"
                                             />
                                             ) : (
                                             <span>{item}</span>
@@ -115,9 +115,11 @@ export class Navbarlist extends React.Component {
                                     
                                     </li>
                                 ))}
+                                    {this.state.requests.length < 9 && (
                                     <li className="pl-2">
                                         <Add_button onClick={this.addTab} />
                                     </li>
+                                    )}
                         </ul>
                 </div>
                 </>
