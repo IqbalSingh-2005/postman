@@ -40,7 +40,7 @@ export class Navbarlist extends React.Component {
     render(){
         return (
                 <>
-                <div className="px-3 py-2 border-b-[1px] border-amber-50">
+                <div className="px-3 py-2 border-b-[1px] border-[#464646]">
                         <ul className="flex flex-row  ">
                             {this.state.requests.map((item, index) => (
                                     <li
