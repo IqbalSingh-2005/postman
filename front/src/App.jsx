@@ -28,7 +28,7 @@ function App() {
       <NavbarMain  />
       <Navbarlist />
       <Request onSend={handleSend} />
-      {/* <Response response={response} /> */}
+      <Response response={response} />
       
     </div>
     </>

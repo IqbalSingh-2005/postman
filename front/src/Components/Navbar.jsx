@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+
 
 export class NavbarMain extends React.Component {
     render(){
@@ -24,19 +25,60 @@ export class Navbarlist extends React.Component {
     constructor(){
         super();
         this.state = {
-             requests: ["Request 1", "Request 2"]
-        }
+             requests: ["Request 1"],
+             editingIndex: null,
+             draft: "",
+                    };
+
         this.addTab = ()=>{
             const newRequest = `Requests ${this.state.requests.length + 1}`
-
             this.setState((prevRequests)=>({
                 requests: [...prevRequests.requests, newRequest],
             }))
+                        }
+                }
+
+    componentDidUpdate(prevProps, prevState) {
+
+            if (this.state.editingIndex !== null &&
+                prevState.editingIndex !== this.state.editingIndex &&
+                this.inputRef.current
+            ) {
+                this.inputRef.current.focus();
+                this.inputRef.current.select();
+            }
+        };
+
+    inputRef = React.createRef();
+
+    renameReq = (index) => {
+            this.setState({
+                editingIndex: index,
+                draft: this.state.requests[index],
+            });
+        };
+
+    commit = () => {
+            const { editingIndex, draft, requests } = this.state;
+            if (editingIndex === null) return;
+
+            const next = [...requests];
+            const newValue = draft.trim()
+            next[editingIndex] = newValue.length ? newValue : requests[editingIndex];
+
+
+            this.setState({
+                requests: next,
+                editingIndex: null,
+                draft: "",
+            });
         }
-        this.renameReq = () => {
-            
-        }
-    }
+
+    onKeyDown = (e) => {
+        if (e.key === "Enter") 
+            this.commit();
+        };
+
     render(){
         return (
                 <>
@@ -49,12 +91,28 @@ export class Navbarlist extends React.Component {
                                     > 
                                     <div className="p-1 hover-btn rounded-[4px]
                                                     text-[14px] text-[#fff]"
+                                                    onDoubleClick={() => this.renameReq(index)}        
                                         >
-                                        {item}
+                                            {this.state.editingIndex === index ? (
+                                            <input
+                                                ref={this.inputRef}
+                                                value={this.state.draft}
+                                                onChange={(e) =>
+                                                this.setState({ draft: e.target.value })
+                                                }
+                                                onKeyDown={this.onKeyDown}
+                                                onBlur={this.commit} // clicking away saves
+                                                className="bg-[#1f1f1f] border border-[#555] rounded-[4px] px-2 py-[2px] text-[#fff] outline-none w-[100px]"
+                                            />
+                                            ) : (
+                                            <span>{item}</span>
+                                            )}
                                     </div>
                                     {index !== this.state.requests.length - 1 && (
                                         <div className="absolute right-0 top-1/2 -translate-y-1/2 h-3 w-[1.5px] border-[1px] rounded-2xl border-[#7c7c7caf]"></div>
                                     )}
+
+                                    
                                     </li>
                                 ))}
                                     <li className="pl-2">

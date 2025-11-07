@@ -1,5 +1,8 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
+import { registerMonacoThemes } from "../editorTheme/monacoTheme";
+
+
 
 
 
@@ -23,22 +26,16 @@ export class Response extends React.Component {
 
     return (
       <>
-      <div className="border-2 border-[#9e9e9e66]
-        m-4  h-full min-h-[400px] 
+      <div className="border-1 border-[#9e9e9e66]
+         mx-1 my-1/2 h-full min-h-[400px] 
       ">
-            <div className="">
-              
+            <div className="mx-4">
               <select
                 value={this.state.view}
                 onChange={this.handleViewChange}
                 className="
-                  w-[120px]
-                  border-2
-                  border-[#504f4f]
+                  w-[80px]
                   text-[#bbbbbb]
-                  border-t-0
-                  border-l-0
-                  border-b-0
                   py-1
                   px-1
                   focus:outline-none
@@ -53,25 +50,31 @@ export class Response extends React.Component {
                   </option>
                 ))}
               </select>
-              <div className="border-2 
+              <div className="
               
               border-l-0
               border-r-0
               border-[#9e9e9e66]">
-                <div className="p-2">
-                  <p className="text-[#bbbbbb]">Response {this.state.view === 'headers' ? 'Headers' : 'Body'}</p>
+                <div className="p-2 "
+                >
+                  
                   <Editor 
                   defaultLanguage={language}
-                  theme="vs-dark"
                   value={displayValue}
+                  theme="customDark"
+                  beforeMount={(monaco) => {
+        registerMonacoThemes(monaco);
+                  }}
                   options={{
+                    
                     fontSize: 14,
+                    
                     fontFamily: "Fira Code, monospace",
                     minimap: { enabled: false },
                     wordWrap: "on",
                     scrollBeyondLastLine: false,
                     automaticLayout: true,
-                    lineNumbers: "off",
+                    
                   }}
                   className="text-[#eeeeee] w-full h-full min-h-[400px]"
                     />

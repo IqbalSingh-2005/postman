@@ -55,7 +55,8 @@ export class Request extends React.Component {
                 ))}
                 
               </select>
-              <div className="absolute right-2 inset-y-[14px]">
+              <div className="absolute right-2 inset-y-[14px] pointer-events-none
+              hover:cursor-pointer">
             <IoIosArrowDown color="#ffffff"
                 />
             </div>
