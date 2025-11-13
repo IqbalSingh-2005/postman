@@ -18,8 +18,24 @@ export class Request extends React.Component {
 
   handleSend = () => {
   const { method, url } = this.state;
-  this.props.onSend({ method, url });
-  };
+
+  if (!url.trim()) return;  // Avoid blank sends
+
+  this.props.onSend({
+    ...this.props.request,   // keep id, headers, body
+    method,
+    url,
+  });
+};
+
+  componentDidUpdate(prevProps) {
+  if (this.props.request && this.props.request !== prevProps.request) {
+    this.setState({
+      method: this.props.request.method || "get",
+      url: this.props.request.url || "",
+    });
+  }
+}
 
 
   render() {

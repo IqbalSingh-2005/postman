@@ -18,7 +18,23 @@ export class Response extends React.Component {
   };
 
   render() {
-    const resp = this.props.response || {};
+    const raw = this.props.response || {};
+
+    // Normalize different shapes: API returns { body, headers }, DB may return a string or parsed object
+    let resp = {};
+    if (typeof raw === 'string') {
+      // try to parse JSON string saved in DB
+      try {
+        resp = JSON.parse(raw);
+      } catch (e) {
+        resp = { body: raw };
+      }
+    } else if (raw && typeof raw === 'object') {
+      resp = raw;
+    } else {
+      resp = {};
+    }
+
     const body = resp.body ?? resp.text ?? "";
     const headers = resp.headers ? JSON.stringify(resp.headers, null, 2) : "";
     const displayValue = this.state.view === "headers" ? headers : (typeof body === 'string' ? body : JSON.stringify(body, null, 2));
