@@ -240,11 +240,4 @@ PY
 
 ---
 
-If you want, I can also:
-
-- Add a `start-dev.bat` to launch both servers with one command.
-- Create a seed script that inserts an example saved request into the DB for easier testing.
-- Add a short `front/README.md` that documents `VITE_API_URL` usage and a Vite proxy example.
-
-Tell me which of those you'd like and I'll add it.
 
