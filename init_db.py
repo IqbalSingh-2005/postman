@@ -8,7 +8,12 @@ DB_NAME = 'postman.db'
 
 @contextmanager
 def get_db_connection():
-    """Context manager for database connections to ensure proper cleanup"""
+    """Context manager for database connections to ensure proper cleanup.
+    
+    Note: check_same_thread=False is used because Flask may handle requests
+    in different threads. The context manager ensures each request gets its
+    own connection that is properly closed, maintaining thread safety.
+    """
     conn = sqlite3.connect(DB_NAME, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     try:
