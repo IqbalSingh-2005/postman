@@ -19,22 +19,22 @@ def api_request():
     payload = data.get('data')
     json_payload = data.get('json')
 
-    try:
-        if method == 'get':
-            resp = pyrequests.get(url, params=params, timeout=30)
-        elif method == 'post':
-            resp = pyrequests.post(url, data=payload, json=json_payload, timeout=30)
-        elif method == 'put':
-            resp = pyrequests.put(url, data=payload, json=json_payload, timeout=30)
-        elif method == 'patch':
-            resp = pyrequests.patch(url, data=payload, json=json_payload, timeout=30)
-        elif method == 'delete':
-            resp = pyrequests.delete(url, timeout=30)
-        elif method == 'head':
-            resp = pyrequests.head(url, timeout=30)
-        else:
-            return jsonify({'error': f'Unsupported method: {method}'}), 400
+    # Dictionary dispatch for HTTP methods
+    http_methods = {
+        'get': lambda: pyrequests.get(url, params=params, timeout=30),
+        'post': lambda: pyrequests.post(url, data=payload, json=json_payload, timeout=30),
+        'put': lambda: pyrequests.put(url, data=payload, json=json_payload, timeout=30),
+        'patch': lambda: pyrequests.patch(url, data=payload, json=json_payload, timeout=30),
+        'delete': lambda: pyrequests.delete(url, timeout=30),
+        'head': lambda: pyrequests.head(url, timeout=30)
+    }
 
+    try:
+        request_func = http_methods.get(method)
+        if not request_func:
+            return jsonify({'error': f'Unsupported method: {method}'}), 400
+        
+        resp = request_func()
         result = {
             'status_code': resp.status_code,
             'headers': dict(resp.headers),
